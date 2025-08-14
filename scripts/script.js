@@ -39,6 +39,7 @@ let books = [
   },
   {
     'name': 'Der vergessene Pfad',
+    'image': './img/dervergessenePfad.jpg',
     'author': 'Maximilian Schwarz',
     'likes': 980,
     'liked': false,
@@ -49,6 +50,7 @@ let books = [
   },
   {
     'name': 'Die Farben des Himmels',
+    'image': './img/dieFarbendesHimmels.jpg',
     'author': 'Laura Blau',
     'likes': 1520,
     'liked': true,
@@ -85,6 +87,7 @@ let books = [
   },
   {
     'name': 'Das Rätsel der Zeit',
+    'image': './img/dasRaetselderZeit.jpg',
     'author': 'Alexander Weiss',
     'likes': 750,
     'liked': false,
@@ -106,6 +109,7 @@ let books = [
   },
   {
     'name': 'Der letzte Wächter',
+    'image': './img/derletzteWaechter.jpg',
     'author': 'Sabine Grün',
     'likes': 1300,
     'liked': true,
@@ -116,6 +120,7 @@ let books = [
   },
   {
     'name': 'Im Schatten des Mondes',
+    'image': './img/imSchattendesMondes.jpg',
     'author': 'Philipp Silber',
     'likes': 890,
     'liked': false,
@@ -137,10 +142,11 @@ let books = [
   },
   {
     'name': 'Jenseits der Sterne',
+    'image': './img/jenseitsderSterne.jpg',
     'author': 'Oliver Schwarz',
     'likes': 1450,
     'liked': true,
-    'price': 21.0,
+    'price': 21.9,
     'publishedYear': 2015,
     'genre': 'Science-Fiction',
     'comments': [
@@ -153,6 +159,7 @@ let books = [
   },
   {
     'name': 'Das verborgene Königreich',
+    'image': './img/dasverborgeneKoenigreich.jpg',
     'author': 'Elena Gold',
     'likes': 920,
     'liked': false,
@@ -169,6 +176,7 @@ let books = [
   },
   {
     'name': 'Liebe in Zeiten des Krieges',
+    'image': './img/liebeinZeitendesKrieges.jpg',
     'author': 'Emilia Rot',
     'likes': 1800,
     'liked': true,
@@ -204,6 +212,31 @@ function renderBooks() {
   let bookRef = document.getElementById('content');
 
   for (let i = 0; i < books.length; i++) {
-    const element = array[i];
+    bookRef.innerHTML += getHTMLForBoook(i);
   }
+}
+
+// toFixed() method converts a number to a string and rounds the string to a specified number of decimals; replace() can be only applied to strings not numbers
+function getHTMLForBoook(indexBook) {
+  return `
+  <div class="book_card">
+  <div class="book_container">
+  <h4 id="nameOfBook">${books[indexBook].name}</h4>
+  <img src="${books[indexBook].image}" alt="Cover of ${
+    books[indexBook].name
+  }" id="book_image" />
+  <div id="price"></div>${books[indexBook].price
+    .toFixed(2)
+    .replace('.', ',')} € 
+  <div id="likesFromPeople">${books[indexBook].likes}</div>
+  <div id="liked"></div>
+  <div>Author</div>
+  <div>Year published</div>
+  <div>Genre</div>
+  <div id="">Comments</div>
+  <div></div>
+  <div></div>
+  </div>
+  </div>
+  `;
 }
