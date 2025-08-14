@@ -194,5 +194,3 @@ let books = [
     ],
   },
 ];
-
-console.log();
