@@ -222,13 +222,20 @@ function getHTMLForBoook(indexBook) {
   <div class="book_card">
   <div class="book_container">
   <h4 id="nameOfBook">${books[indexBook].name}</h4>
+  <div class="book_image_container">
   <img src="${books[indexBook].image}" alt="Cover of ${
     books[indexBook].name
-  }" id="book_image" />
-  <div id="price"></div>${books[indexBook].price
+  }" class="book_image" />
+  </div>
+  <div class="seperator_container">
+  <div class="seperator_line"></div> 
+  </div>
+  <div class="price_likes_container">
+  <div id="price">${books[indexBook].price
     .toFixed(2)
-    .replace('.', ',')} € 
+    .replace('.', ',')} € </div>
   <div id="likesFromPeople">${books[indexBook].likes}</div>
+  </div>
   <div id="liked"></div>
   <div>Author</div>
   <div>Year published</div>

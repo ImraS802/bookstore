@@ -22,7 +22,7 @@ body {
 .content_limitation {
     display: flex;
     justify-content: center;
-    background-color: #002147;
+    background-color: #1E272E;
 }
 
 .logo {
@@ -36,7 +36,7 @@ header {
     padding: 20px 70px;
     width: 100%;
     max-width: 1440px;
-    color: #6699CC;
+    color: #b48a4e;
 }
 
 .header_content {
@@ -78,23 +78,57 @@ main {
     justify-content: center;
 }
 
+.book_card {
+    background-color: #36454F;
+    color: white;
+    border: 1px solid black;
+    padding: 16px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    border-radius: 20px;
+    position: relative;
+}
+
 h4 {
     text-align: center;
 }
 
-.book_card {
-    background-color: #0E3386;
-    color: white;
-    border: 1px solid black;
-    padding: 16px;
-    width: 700px;
+.book_image_container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+}
+
+.book_image {
+    width: 400px;
+    height: auto;
+    border-radius: 15px;
+    margin: 30px 0 40px;
+    filter: drop-shadow(0px 0px 20px #f7f5f3);
+}
+
+.seperator_container {
+    display: flex;
+    justify-content: center;
+}
+
+.seperator_line {
+    background-color: #517889;
+    width: 650px;
+    height: 1px;
+    margin-bottom: 10px;
+}
+
+.price_likes_container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .content_footer {
     width: 100%;
-    background-color: #002147;
+    background-color: #1E272E;
     display: flex;
     justify-content: center;
 }
