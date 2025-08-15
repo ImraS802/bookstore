@@ -33,7 +33,7 @@ body {
 header {
     display: flex;
     justify-content: flex-start;
-    padding: 20px 70px;
+    padding: 20px;
     width: 100%;
     max-width: 1440px;
     color: #b48a4e;
@@ -73,9 +73,17 @@ header {
 
 main {
     flex: 1;
-    max-width: 1440px;
     display: flex;
     justify-content: center;
+}
+
+.main_content_limitation {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .book_card {
@@ -91,8 +99,13 @@ main {
     position: relative;
 }
 
+.book_details {
+    margin: 40px;
+}
+
 h4 {
     text-align: center;
+    font-size: 24px;
 }
 
 .book_image_container {
@@ -124,6 +137,21 @@ h4 {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#price {
+    font-size: 24px;
+    color: hsl(120, 65%, 45%);
+}
+
+.gap_for_values {
+    display: grid;
+    /* The first column is exactly 150 pixels wide — this is where your label (e.g., “Author”, “Year published:”) will go. The second column takes up the remaining space (1fr means “one fraction of the leftover space”) — this is where your values (e.g., author name, year) will go */
+    grid-template-columns: 150px 1fr;
+    align-items: start;
+    /* spacing between rows */
+    margin-bottom: 4px;
 }
 
 .content_footer {

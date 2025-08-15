@@ -213,6 +213,10 @@ function renderBooks() {
 
   for (let i = 0; i < books.length; i++) {
     bookRef.innerHTML += getHTMLForBoook(i);
+    let commentsRef = document.getElementById(`comments${i}`);
+    for (let j = 0; j < books[i].comments.length; j++) {
+      commentsRef.innerHTML += getHTMLForComments(i, j);
+    }
   }
 }
 
@@ -220,7 +224,6 @@ function renderBooks() {
 function getHTMLForBoook(indexBook) {
   return `
   <div class="book_card">
-  <div class="book_container">
   <h4 id="nameOfBook">${books[indexBook].name}</h4>
   <div class="book_image_container">
   <img src="${books[indexBook].image}" alt="Cover of ${
@@ -230,6 +233,7 @@ function getHTMLForBoook(indexBook) {
   <div class="seperator_container">
   <div class="seperator_line"></div> 
   </div>
+  <div class="book_details">
   <div class="price_likes_container">
   <div id="price">${books[indexBook].price
     .toFixed(2)
@@ -237,13 +241,24 @@ function getHTMLForBoook(indexBook) {
   <div id="likesFromPeople">${books[indexBook].likes}</div>
   </div>
   <div id="liked"></div>
-  <div>Author</div>
-  <div>Year published</div>
-  <div>Genre</div>
-  <div id="">Comments</div>
-  <div></div>
+  <div class="gap_for_values">
+  <div>Author:</div>
+  <div>${books[indexBook].author}</div>
+  </div>
+  <div class="gap_for_values">
+  <div>Year published:</div>
+  <div>${books[indexBook].publishedYear}</div>
+</div>
+  <div>Genre:</div>
+  <div>Comments:</div>
+  <div id="comments${indexBook}"></div>
   <div></div>
   </div>
   </div>
   `;
+}
+
+function getHTMLForComments(indexA, indexB) {
+  return `
+  <div>${books[indexA].comments[indexB]}</div>`;
 }
