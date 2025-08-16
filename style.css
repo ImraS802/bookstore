@@ -145,13 +145,38 @@ h4 {
     color: hsl(120, 65%, 45%);
 }
 
+.comments_headline {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 40px 0 10px 0;
+}
+
 .gap_for_values {
     display: grid;
     /* The first column is exactly 150 pixels wide — this is where your label (e.g., “Author”, “Year published:”) will go. The second column takes up the remaining space (1fr means “one fraction of the leftover space”) — this is where your values (e.g., author name, year) will go */
     grid-template-columns: 150px 1fr;
     align-items: start;
     /* spacing between rows */
-    margin-bottom: 4px;
+    margin-bottom: 10px;
+}
+
+.gap_for_values_comments {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    align-items: start;
+    margin-bottom: 20px;
+}
+
+.heart_icon {
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-left: 8px;
+    color: white;
+    transition: color 0.2s ease;
+}
+
+.heart_icon.liked {
+    color: red;
 }
 
 .content_footer {

@@ -1,4 +1,5 @@
-'strict';
+'use strict';
+
 let books = [
   {
     'name': 'Die Geheimnisse des Ozeans',
@@ -209,19 +210,41 @@ function init() {
 }
 
 function renderBooks() {
-  let bookRef = document.getElementById('content');
+  let bookRef = document.getElementById('content'); // Finds the HTML element with the id="content" in your HTML
 
   for (let i = 0; i < books.length; i++) {
-    bookRef.innerHTML += getHTMLForBoook(i);
-    let commentsRef = document.getElementById(`comments${i}`);
-    for (let j = 0; j < books[i].comments.length; j++) {
-      commentsRef.innerHTML += getHTMLForComments(i, j);
+    // Loops through every book in your books array. i is the index of the current book.
+    bookRef.innerHTML += getHTMLForBook(i); // Calls getHTMLForBoook(i). This function returns a block of HTML for the i-th book. Appends (+=) that HTML to whatever is already inside bookRef.
+
+    let commentsRef = document.getElementById(`comments${i}`); // Finds the <div> where this specific book’s comments should go.
+    // The ID is dynamically generated using template literals:
+    // For example, when i = 0, it looks for id="comments0".
+    // When i = 1, it looks for id="comments1", and so on.
+    // Stores that element reference in commentsRef
+
+    if (books[i].comments.length > 0) {
+      // Checks if the current book has any comments
+      for (let j = 0; j < books[i].comments.length; j++) {
+        // j is the index of the current comment in that book’s comments array
+        // if yes, loop through all of them
+        commentsRef.innerHTML += getHTMLForComments(i, j); // Calls getHTMLForComments(i, j) which returns HTML for one specific comment of one specific book.
+        // Appends this HTML to the commentsRef container so it shows up on the page
+        //You pass it i (the current book’s index) and j (the current comment’s index for that book)
+      }
+    } else {
+      commentsRef.innerHTML = `<div class="no_comments">No comments yet</div>`; // if no comments are written yet
     }
   }
 }
 
 // toFixed() method converts a number to a string and rounds the string to a specified number of decimals; replace() can be only applied to strings not numbers
-function getHTMLForBoook(indexBook) {
+
+// heart icon explained: id="likesFromPeople-${indexBook}" makes the ID unique for each book (likesFromPeople-0, likesFromPeople-1, etc.). ${books[indexBook].likes} inserts the actual number of likes from the book object
+// &#10084; is the HTML entity for the heart symbol. onclick="toggleLike(${indexBook}, this)" → when clicked, it calls your toggleLike function: indexBook tells the function which book is being liked/unliked.
+// this (parameter in onclick="toggleLike(${indexBook}, this)") Inside an inline onclick, this refers to the DOM element that was clicked. In this case, it is the <span class="heart_icon"> itself.
+// So when you click the heart, the call looks like: toggleLike(0, <span class="heart_icon">♥</span>). So here: indexBook = 0heartElement = <span class="heart_icon">♥</span> (the actual HTML element that was clicked).
+// That’s why inside your function you can write: if (heartElement.classList.contains('liked')) {...}
+function getHTMLForBook(indexBook) {
   return `
   <div class="book_card">
   <h4 id="nameOfBook">${books[indexBook].name}</h4>
@@ -238,9 +261,15 @@ function getHTMLForBoook(indexBook) {
   <div id="price">${books[indexBook].price
     .toFixed(2)
     .replace('.', ',')} € </div>
-  <div id="likesFromPeople">${books[indexBook].likes}</div>
+     <div class="likes_container">
+  <span id="likesFromPeople-${indexBook}">${books[indexBook].likes}</span>
+   <span 
+   id="heart-${indexBook}" 
+              class="heart_icon" 
+              onclick="toggleLike(${indexBook})"
+            >&#10084;</span>
+   </div>
   </div>
-  <div id="liked"></div>
   <div class="gap_for_values">
   <div>Author:</div>
   <div>${books[indexBook].author}</div>
@@ -249,16 +278,39 @@ function getHTMLForBoook(indexBook) {
   <div>Year published:</div>
   <div>${books[indexBook].publishedYear}</div>
 </div>
+ <div class="gap_for_values">
   <div>Genre:</div>
-  <div>Comments:</div>
+  <div>${books[indexBook].genre}</div>
+  </div>
+  <div class="comments_headline">Comments:</div>
   <div id="comments${indexBook}"></div>
-  <div></div>
   </div>
   </div>
   `;
 }
 
 function getHTMLForComments(indexA, indexB) {
+  const commentObj = books[indexA].comments[indexB];
   return `
-  <div>${books[indexA].comments[indexB]}</div>`;
+   <div class="gap_for_values_comments"><div class="comment_name">${commentObj.name}:</div>
+<div class="comment_text">${commentObj.comment}</div></div>
+`;
+}
+
+// heart icon likes
+function toggleLike(indexBook) {
+  const likesRef = document.getElementById(`likesFromPeople-${indexBook}`); // Finds the <span> where the number of likes is displayed. Example: for book 0 → document.getElementById("likesFromPeople-0"). Saves a reference to it in likesRef
+  const heartElement = document.getElementById(`heart-${indexBook}`);
+  let currentLikes = parseInt(likesRef.innerText); // Reads the number inside the likes <span> (as text). parseInt converts it from a string → number. Stores it in currentLikes
+
+  if (heartElement.classList.contains('liked')) {
+    // Checks if the heart icon already has the class "liked". "liked" means the user already pressed like.
+    // Unlike
+    likesRef.innerText = currentLikes - 1; // Decrease the number shown (currentLikes - 1)
+    heartElement.classList.remove('liked'); // Remove "liked" class so the heart goes back to white
+  } else {
+    // Like
+    likesRef.innerText = currentLikes + 1; // Increase the number shown (currentLikes + 1)
+    heartElement.classList.add('liked'); // Add "liked" class so the heart turns red
+  }
 }
