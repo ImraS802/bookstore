@@ -151,6 +151,11 @@ h4 {
     margin: 40px 0 10px 0;
 }
 
+.send_message_icon {
+    width: auto;
+    height: 10px;
+}
+
 .gap_for_values {
     display: grid;
     /* The first column is exactly 150 pixels wide — this is where your label (e.g., “Author”, “Year published:”) will go. The second column takes up the remaining space (1fr means “one fraction of the leftover space”) — this is where your values (e.g., author name, year) will go */

@@ -294,10 +294,10 @@ function getHTMLForBook(indexBook) {
       <div id="comments${indexBook}"></div>
   </div>
   <div class="add_comment">
-    <input id="commentName-${indexBook}" type="text" placeholder="Your name" />
-    <input id="commentText-${indexBook}" type="text" placeholder="Write a comment..." />
+    <input id="newCommentName-${indexBook}" type="text" placeholder="Your name" />
+    <input id="newCommentText-${indexBook}" type="text" placeholder="Write a comment..." />
       <button onclick="addComment(${indexBook})">
-        Post
+        <img src="./img/send.png" alt="send message icon" class="send_message_icon" />
       </button>
 </div>
 
@@ -336,4 +336,37 @@ function toggleLike(indexBook) {
     likesRef.innerText = currentLikes + 1; // Increase the number shown (currentLikes + 1)
     heartIcon.classList.add('liked'); // Add "liked" class so the heart turns red
   }
+}
+
+function addComment(indexBook) {
+  // Get input fields for this specific book
+  const nameInput = document.getElementById(`commentName-${indexBook}`);
+  const textInput = document.getElementById(`commentText-${indexBook}`);
+  const commentsRef = document.getElementById(`comments${indexBook}`);
+
+  // Read values
+  const name = nameInput.value.trim();
+  const comment = textInput.value.trim();
+
+  // Simple validation (no empty comments)
+  if (name === '' || comment === '') {
+    alert('Please enter your name and a comment.');
+    return;
+  }
+
+  // Add new comment to the books array
+  books[indexBook].comments.push({
+    name: name,
+    comment: comment,
+  });
+
+  // Update UI → append new comment HTML
+  commentsRef.innerHTML += getHTMLForComments(
+    indexBook,
+    books[indexBook].comments.length - 1 // last added comment index
+  );
+
+  // Clear input fields
+  nameInput.value = '';
+  textInput.value = '';
 }
