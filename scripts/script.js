@@ -292,6 +292,9 @@ function getHTMLForBook(indexBook) {
     <div class="comments_headline">Comments:</div>
       <div id="comments${indexBook}"></div>
   </div>
+  <div class="seperator_container">
+      <div class="seperator_line_comments"></div> 
+    </div>
   <div class="add_comment">
     <input class="input_field" id="newCommentName-${indexBook}" type="text" placeholder="Your name" />
     <input class="input_field" id="newCommentText-${indexBook}" type="text" placeholder="Write a comment..." />

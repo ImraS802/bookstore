@@ -10,6 +10,7 @@ body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    scroll-behavior: smooth;
 }
 
 @font-face {
@@ -26,8 +27,13 @@ body {
 }
 
 .logo {
-    width: 200;
-    height: 60px;
+    width: auto;
+    height: 70px;
+}
+
+.logo_footer {
+    width: auto;
+    height: 50px;
 }
 
 header {
@@ -89,7 +95,7 @@ main {
 .book_card {
     background-color: #36454F;
     border: 1px solid black;
-    padding: 16px;
+    padding: 16px 16px 24px 16px;
     width: 600px;
     display: flex;
     flex-direction: column;
@@ -99,7 +105,7 @@ main {
 }
 
 .book_details {
-    margin: 40px;
+    margin: 40px 40px 30px 40px;
     color: white;
 }
 
@@ -134,6 +140,13 @@ h4 {
     margin-bottom: 10px;
 }
 
+.seperator_line_comments {
+    background-color: #517889;
+    width: 650px;
+    height: 1px;
+    margin-bottom: 30px;
+}
+
 .price_likes_container {
     width: 100%;
     display: flex;
@@ -155,9 +168,19 @@ h4 {
 .send_message_icon {
     width: auto;
     height: 20px;
+    filter: invert(49%) sepia(30%) saturate(454%) hue-rotate(153deg) brightness(84%) contrast(90%);
+}
+
+.comment_button:hover {
+    filter: invert(92%) sepia(9%) saturate(301%) hue-rotate(150deg) brightness(94%) contrast(87%);
 }
 
 .comment_button {
+    display: flex;
+    /* make button a flex container */
+    align-items: center;
+    /* center icon vertically */
+    justify-content: center;
     background: none;
     /* remove background */
     border: none;
@@ -174,7 +197,8 @@ h4 {
 }
 
 .add_comment {
-    margin-left: 40px;
+    padding: 0 40px;
+    gap: 8px;
     display: flex;
     align-items: center;
 }
@@ -183,6 +207,8 @@ h4 {
     border-radius: 5px;
     padding: 5px;
     margin-right: 10px;
+    background-color: #C5D6DC;
+    border: none;
 }
 
 .gap_for_values {
@@ -243,10 +269,24 @@ footer {
     height: auto;
     filter: invert(100%) brightness(200%);
     transition: filter 125ms ease;
-
 }
 
 .social_media:hover,
 .social_media:focus {
     filter: drop-shadow(0px 0px 5px #f7f5f3);
+}
+
+.brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    padding-top: 10px;
+}
+
+.social_media_and_brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
