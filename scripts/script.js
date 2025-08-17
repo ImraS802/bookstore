@@ -206,7 +206,6 @@ let books = [
 
 function init() {
   renderBooks();
-  loadFromLocalStorage();
 }
 
 function renderBooks() {
@@ -294,11 +293,12 @@ function getHTMLForBook(indexBook) {
       <div id="comments${indexBook}"></div>
   </div>
   <div class="add_comment">
-    <input id="newCommentName-${indexBook}" type="text" placeholder="Your name" />
-    <input id="newCommentText-${indexBook}" type="text" placeholder="Write a comment..." />
-      <button onclick="addComment(${indexBook})">
+    <input class="input_field" id="newCommentName-${indexBook}" type="text" placeholder="Your name" />
+    <input class="input_field" id="newCommentText-${indexBook}" type="text" placeholder="Write a comment..." />
+      <button class="comment_button" onclick="addComment(${indexBook})">
         <img src="./img/send.png" alt="send message icon" class="send_message_icon" />
       </button>
+      <div class="red_error_message" id="error_message-${indexBook}"></div>
 </div>
 
 </div>
@@ -340,30 +340,35 @@ function toggleLike(indexBook) {
 
 function addComment(indexBook) {
   // Get input fields for this specific book
-  const nameInput = document.getElementById(`commentName-${indexBook}`);
-  const textInput = document.getElementById(`commentText-${indexBook}`);
-  const commentsRef = document.getElementById(`comments${indexBook}`);
+  const nameInput = document.getElementById(`newCommentName-${indexBook}`);
+  const textInput = document.getElementById(`newCommentText-${indexBook}`);
+  const commentsRef = document.getElementById(`comments${indexBook}`); // comments container for this specific book
+  const errorMsg = document.getElementById(`error_message-${indexBook}`);
 
   // Read values
-  const name = nameInput.value.trim();
+  const name = nameInput.value.trim(); // get typed in value and trim() removes empty space
   const comment = textInput.value.trim();
-
+  console.log(errorMsg);
   // Simple validation (no empty comments)
   if (name === '' || comment === '') {
-    alert('Please enter your name and a comment.');
+    errorMsg.innerHTML = '<div>Please type in a name and comment</div>';
+    errorMsg.style.display = 'block'; // Guard clause: if either field is empty, show a message and stop (prevents adding empty comments)
     return;
   }
 
+  errorMsg.style.display = 'none';
+
   // Add new comment to the books array
   books[indexBook].comments.push({
+    // Add a new comment object to the correct book’s comments array
     name: name,
     comment: comment,
   });
 
-  // Update UI → append new comment HTML
+  // Update the UI without re-rendering everything: append HTML for just the newly added comment.
   commentsRef.innerHTML += getHTMLForComments(
     indexBook,
-    books[indexBook].comments.length - 1 // last added comment index
+    books[indexBook].comments.length - 1 // books[indexBook].comments.length - 1 is the index of the last (just pushed) comment
   );
 
   // Clear input fields

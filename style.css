@@ -88,7 +88,6 @@ main {
 
 .book_card {
     background-color: #36454F;
-    color: white;
     border: 1px solid black;
     padding: 16px;
     width: 600px;
@@ -101,11 +100,13 @@ main {
 
 .book_details {
     margin: 40px;
+    color: white;
 }
 
 h4 {
     text-align: center;
     font-size: 24px;
+    color: white;
 }
 
 .book_image_container {
@@ -153,7 +154,35 @@ h4 {
 
 .send_message_icon {
     width: auto;
-    height: 10px;
+    height: 20px;
+}
+
+.comment_button {
+    background: none;
+    /* remove background */
+    border: none;
+    /* remove border */
+    padding: 0;
+    /* remove extra spacing */
+    cursor: pointer;
+}
+
+.red_error_message {
+    color: #f34444;
+    display: none;
+    margin: 10px 0;
+}
+
+.add_comment {
+    margin-left: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.input_field {
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 10px;
 }
 
 .gap_for_values {
