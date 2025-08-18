@@ -205,11 +205,29 @@ let books = [
 ];
 
 function init() {
+  const localStorageSavedBooks = localStorage.getItem('books');
+  if (localStorageSavedBooks) {
+    books = JSON.parse(localStorageSavedBooks); // overwrite books with saved version, books is stored in localStorage (as JSON).
+  }
   renderBooks();
+
+  // After rendering, re-apply liked class for localStorage
+  books.forEach((book, index) => {
+    const heartIcon = document.getElementById(`heart-${index}`);
+    const likesRef = document.getElementById(
+      `numberOfLikesFromPeople-${index}`
+    );
+
+    if (book.liked) {
+      heartIcon.classList.add('liked');
+    }
+    likesRef.innerText = book.likes; // make sure UI matches saved likes
+  });
 }
 
 function renderBooks() {
   let bookRef = document.getElementById('content'); // Finds the HTML element with the id="content" in your HTML
+  bookRef.innerHTML = '';
 
   for (let i = 0; i < books.length; i++) {
     // Loops through every book in your books array. i is the index of the current book.
@@ -239,23 +257,32 @@ function renderBooks() {
 // heart icon likes
 function toggleLike(indexBook) {
   // It checks if the heart already has the "liked" class
-  // indexBook, tells the function which book in your books array was clicked
+  // indexBook, it takes indexBook as a parameter → this tells the function which book in the books array we’re updating
   const likesRef = document.getElementById(
     `numberOfLikesFromPeople-${indexBook}`
   ); // Finds the <span> where the number of likes is displayed. Example: for book 0 → document.getElementById("numberOfLikesFromPeople-0"). Saves a reference to it in likesRef
   const heartIcon = document.getElementById(`heart-${indexBook}`); // Finds the <span> element for the heart icon of this book
-  let currentLikes = parseInt(likesRef.innerText); // Reads the text inside the likesRef element (the number of likes). parseInt converts it from a string "1250" into the number 1250
+  let currentLikes = parseInt(likesRef.innerText); // Reads the current number of likes from the likesRef element’s text. parseInt converts it from a string "1250" into the number 1250
 
   if (heartIcon.classList.contains('liked')) {
     // Checks if the heart icon already has the class "liked". (if true → user already liked). "liked" is what you add when the user has clicked the heart (turning it red, for example). So this condition means: “Has the user already liked this book?”
     // Unlike
     likesRef.innerText = currentLikes - 1; // If the book is already liked: Decrease the like counter by 1 (currentLikes - 1) and update the <span> text.
+    books[indexBook].likes--; // update in books array (for localStorage functionality), substract one like from the value of the key "likes"
+    books[indexBook].liked = false;
     heartIcon.classList.remove('liked'); // Remove "liked" class from the heart so the heart goes back to white
   } else {
     // Like
     likesRef.innerText = currentLikes + 1; // Increase the number shown (currentLikes + 1)
+    books[indexBook].likes++; // update in books array (for localStorage functionality), add one like to the value of the key "likes"
+    books[indexBook].liked = true;
     heartIcon.classList.add('liked'); // Add "liked" class so the heart turns red
   }
+  // Update DOM for localStorage
+  likesRef.innerText = books[indexBook].likes;
+
+  // Save updated books array to localStorage
+  localStorage.setItem('books', JSON.stringify(books));
 }
 
 function addComment(indexBook) {
