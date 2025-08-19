@@ -11,13 +11,15 @@
     <script src="./scripts/template.js"></script>
 </head>
 
-<body onload="init()">
+<body onload="init()" onscroll="checkScroll()">
     <div class="background_img">
         <div class="content_limitation">
             <header id="header">
                 <div class="header_content">
                     <img class="logo" src="./img/book_logo.png" alt="Bookstore logo" />
-                    <h1><span class="brand_name">Chapter Zero</span> Bookstore - Where Every Book Begins</h1>
+                    <h1>
+                        <span class="brand_name">Chapter Zero</span> Bookstore - Where Every Book Begins
+                    </h1>
                 </div>
             </header>
         </div>
@@ -49,6 +51,7 @@
                     </div>
             </footer>
         </div>
+        <button id="backToTop" onclick="scrollToTop()" aria-label="Back to top">↑</button>
     </div>
 </body>
 

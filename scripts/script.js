@@ -6,7 +6,7 @@ let books = [
     'image': './img/dieGeheimnissedesOzeans.jpg',
     'author': 'Clara Meer',
     'likes': 1250,
-    'liked': true,
+    'liked': false,
     'price': 19.99,
     'publishedYear': 2018,
     'genre': 'Fantasy',
@@ -320,4 +320,17 @@ function addComment(indexBook) {
   // Clear input fields
   nameInput.value = '';
   textInput.value = '';
+}
+
+function checkScroll() {
+  const backToTopButton = document.getElementById('backToTop');
+  if (window.scrollY > 200) {
+    backToTopButton.style.display = 'block';
+  } else {
+    backToTopButton.style.display = 'none';
+  }
+}
+
+function scrollToTop() {
+  window.scrollTo(0, 0);
 }
