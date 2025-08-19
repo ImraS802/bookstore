@@ -315,28 +315,58 @@ footer {
 }
 
 /* back to top button */
-#backToTop {
+.backToTop_btn {
+    /* Keeps the button fixed in the viewport, meaning it stays in the same spot even when the page is scrolled. */
     position: fixed;
+    /* Positions the button 40 pixels from the bottom and 40 pixels from the right of the viewport */
     bottom: 40px;
-    right: 40px;
+    right: 280px;
     display: none;
     /* hidden by default */
     background-color: #466474;
     color: white;
     border: none;
     padding: 10px 16px;
+    /* Makes the button circular */
     border-radius: 50%;
     font-size: 20px;
     cursor: pointer;
+    /* Adds a white-ish shadow: 2px horizontal offset; 4px vertical offset; 8px blur radius; rgba(255, 255, 255, 0.4) → white color with 40% opacity */
     box-shadow: 2px 4px 8px rgba(255, 255, 255, 0.4);
+    /* Ensures the button stays on top of most other page elements, preventing it from being hidden behind content */
     z-index: 1000;
-    transition: opacity 0.6s ease, transform 0.3s ease;
+    transition: opacity 0.6s ease;
 }
 
 #backToTop:hover {
     background-color: #6C93A4;
-    transform: translateY(-2px);
+    /* Moves the button up 1 pixel slightly when hovered, creating a subtle “lift” effect */
+    transform: translateY(-1px);
 }
+
+@media(max-width: 1360px) {
+    .backToTop_btn {
+        right: 180px;
+    }
+}
+
+@media(max-width: 1200px) {
+    .backToTop_btn {
+        right: 100px;
+    }
+}
+
+@media(max-width: 940px) {
+    .backToTop_btn {
+        right: 50%;
+        /* Move the button's right edge to 50% of viewport */
+        left: auto;
+        /* Reset any left positioning if set */
+        transform: translateX(50%);
+        /* Shift the button back by 50% of its width to truly center it */
+    }
+}
+
 
 @media(max-width: 680px) {
     .book_card {
