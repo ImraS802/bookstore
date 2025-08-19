@@ -322,9 +322,10 @@ function addComment(indexBook) {
   textInput.value = '';
 }
 
-function checkScroll() {
+function checkScrollForBackToTopButtonAppearence() {
   const backToTopButton = document.getElementById('backToTop');
   if (window.scrollY > 200) {
+    // window.scrollY gives the number of pixels the page has been scrolled vertically from the top
     backToTopButton.style.display = 'block';
   } else {
     backToTopButton.style.display = 'none';
@@ -332,5 +333,5 @@ function checkScroll() {
 }
 
 function scrollToTop() {
-  window.scrollTo(0, 0);
+  window.scrollTo(0, 0); // window.scrollTo(x, y) scrolls the page to a specific position. (0, 0) means scroll to the very top-left corner of the page
 }
