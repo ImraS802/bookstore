@@ -2,7 +2,7 @@
 
 let books = [
   {
-    'name': 'Die Geheimnisse des Ozeans',
+    'name': 'The Secrets of the Ocean',
     'image': './img/dieGeheimnissedesOzeans.jpg',
     'author': 'Clara Meer',
     'likes': 1250,
@@ -12,34 +12,32 @@ let books = [
     'genre': 'Fantasy',
     'comments': [
       {
-        'name': 'Leser123',
+        'name': 'Reader123',
         'comment':
-          'Ein faszinierendes Abenteuerbuch, das mich von der ersten Seite an gefesselt hat.',
+          'A fascinating adventure book that gripped me from the very first page.',
       },
       {
         'name': 'Bookworm84',
         'comment':
-          'Eine romantische Geschichte, die mein Herz berührt und mich zum Nachdenken gebracht hat.',
+          'A romantic story that touched my heart and made me reflect.',
       },
       {
         'name': 'FantasyFanatic',
-        'comment':
-          'Eine spannende Fantasiewelt, die ich nur schwer aus der Hand legen konnte.',
+        'comment': 'An exciting fantasy world that I could hardly put down.',
       },
       {
         'name': 'SciFiGuru',
         'comment':
-          'Ein cleverer Science-Fiction-Roman mit interessanten Zeitreise-Konzepten und Charakteren.',
+          'A clever science fiction novel with interesting time travel concepts and characters.',
       },
       {
         'name': 'NovelLover',
-        'comment':
-          'Ein Buch, das voller magischer Überraschungen steckt und mich begeistert hat.',
+        'comment': 'A book full of magical surprises that delighted me.',
       },
     ],
   },
   {
-    'name': 'Der vergessene Pfad',
+    'name': 'The Forgotten Path',
     'image': './img/dervergessenePfad.jpg',
     'author': 'Maximilian Schwarz',
     'likes': 980,
@@ -50,68 +48,64 @@ let books = [
     'comments': [],
   },
   {
-    'name': 'Die Farben des Himmels',
+    'name': 'The Colors of the Sky',
     'image': './img/dieFarbendesHimmels.jpg',
-    'author': 'Laura Blau',
+    'author': 'Laura Blue',
     'likes': 1520,
     'liked': true,
     'price': 22.95,
     'publishedYear': 2019,
-    'genre': 'Romantik',
+    'genre': 'Romance',
     'comments': [
       {
-        'name': 'LeserPeter',
+        'name': 'ReaderPeter',
         'comment':
-          'Die Handlung war fesselnd und die Charaktere unglaublich lebendig dargestellt.',
+          'The plot was captivating and the characters were portrayed incredibly vividly.',
       },
       {
         'name': 'BookLover21',
-        'comment':
-          'Ein romantisches Meisterwerk, das mich tief berührt und bewegt hat.',
+        'comment': 'A romantic masterpiece that deeply touched and moved me.',
       },
       {
         'name': 'FantasyNerd',
-        'comment':
-          'Fantastische Welten und epische Abenteuer - genau mein Geschmack!',
+        'comment': 'Fantastic worlds and epic adventures — just my taste!',
       },
       {
         'name': 'SciFiEnthusiast',
         'comment':
-          'Die Zeitreise-Elemente waren genial und haben die Story spannend gemacht.',
+          'The time travel elements were brilliant and made the story thrilling.',
       },
       {
         'name': 'ReadingAddict',
-        'comment':
-          'Ein unvergessliches Buch, das mich auf eine magische Reise mitgenommen hat.',
+        'comment': 'An unforgettable book that took me on a magical journey.',
       },
     ],
   },
   {
-    'name': 'Das Rätsel der Zeit',
+    'name': 'The Riddle of Time',
     'image': './img/dasRaetselderZeit.jpg',
-    'author': 'Alexander Weiss',
+    'author': 'Alexander White',
     'likes': 750,
     'liked': false,
     'price': 18.0,
     'publishedYear': 2020,
-    'genre': 'Science-Fiction',
+    'genre': 'Science Fiction',
     'comments': [
       {
-        'name': 'BuchKenner',
+        'name': 'BookExpert',
         'comment':
-          'Ein spannendes Abenteuer, das mich von Anfang an mitgerissen hat.',
+          'An exciting adventure that carried me along from the very beginning.',
       },
       {
-        'name': 'LeseWurm',
-        'comment':
-          'Die Liebesgeschichte war herzergreifend und wunderschön geschrieben.',
+        'name': 'Bookworm',
+        'comment': 'The love story was heartwarming and beautifully written.',
       },
     ],
   },
   {
-    'name': 'Der letzte Wächter',
+    'name': 'The Last Guardian',
     'image': './img/derletzteWaechter.jpg',
-    'author': 'Sabine Grün',
+    'author': 'Sabine Green',
     'likes': 1300,
     'liked': true,
     'price': 16.75,
@@ -120,46 +114,45 @@ let books = [
     'comments': [],
   },
   {
-    'name': 'Im Schatten des Mondes',
+    'name': 'In the Shadow of the Moon',
     'image': './img/imSchattendesMondes.jpg',
-    'author': 'Philipp Silber',
+    'author': 'Philip Silver',
     'likes': 890,
     'liked': false,
     'price': 12.3,
     'publishedYear': 2022,
-    'genre': 'Science-Fiction',
+    'genre': 'Science Fiction',
     'comments': [
       {
-        'name': 'BücherLiebhaber',
+        'name': 'BookLover',
         'comment':
-          'Eine magische Reise durch eine faszinierende Fantasiewelt, absolut fesselnd.',
+          'A magical journey through a fascinating fantasy world, absolutely captivating.',
       },
       {
-        'name': 'Leseratte',
-        'comment':
-          'Ein packender Science-Fiction-Roman, der mich zum Nachdenken gebracht hat.',
+        'name': 'Bookworm',
+        'comment': 'A gripping science fiction novel that made me think.',
       },
     ],
   },
   {
-    'name': 'Jenseits der Sterne',
+    'name': 'Beyond the Stars',
     'image': './img/jenseitsderSterne.jpg',
-    'author': 'Oliver Schwarz',
+    'author': 'Oliver Black',
     'likes': 1450,
     'liked': true,
     'price': 21.9,
     'publishedYear': 2015,
-    'genre': 'Science-Fiction',
+    'genre': 'Science Fiction',
     'comments': [
       {
-        'name': 'Leser123',
+        'name': 'Reader123',
         'comment':
-          'Ein fesselndes Abenteuer, das mich von Anfang bis Ende mitgerissen hat.',
+          'A thrilling adventure that carried me along from beginning to end.',
       },
     ],
   },
   {
-    'name': 'Das verborgene Königreich',
+    'name': 'The Hidden Kingdom',
     'image': './img/dasverborgeneKoenigreich.jpg',
     'author': 'Elena Gold',
     'likes': 920,
@@ -171,58 +164,62 @@ let books = [
       {
         'name': 'Bookworm92',
         'comment':
-          'Ein faszinierendes Buch, das mich von der ersten Seite an gefesselt hat.',
+          'A fascinating book that gripped me from the very first page.',
       },
     ],
   },
   {
-    'name': 'Liebe in Zeiten des Krieges',
+    'name': 'Love in Times of War',
     'image': './img/liebeinZeitendesKrieges.jpg',
-    'author': 'Emilia Rot',
+    'author': 'Emily Red',
     'likes': 1800,
-    'liked': true,
+    'liked': false,
     'price': 19.99,
     'publishedYear': 2016,
-    'genre': 'Romantik',
+    'genre': 'Romance',
     'comments': [
       {
         'name': 'Bibliophile23',
         'comment':
-          'Die Fantasiewelt war so lebendig, ich konnte das Buch kaum aus der Hand legen.',
+          'The fantasy world was so vivid, I could hardly put the book down.',
       },
       {
         'name': 'StorySeeker',
-        'comment':
-          'Eine unglaublich berührende Liebesgeschichte, die mich tief bewegt hat.',
+        'comment': 'An incredibly moving love story that deeply touched me.',
       },
       {
         'name': 'SciFiExplorer',
         'comment':
-          'Spannende Zukunftsvisionen und interessante Charaktere machten diesen Roman einzigartig.',
+          'Exciting visions of the future and interesting characters made this novel unique.',
       },
     ],
   },
 ];
 
 function init() {
-  const localStorageSavedBooks = localStorage.getItem('books');
+  const localStorageSavedBooks = localStorage.getItem('books'); // Looks into the browser’s localStorage and tries to fetch the item stored under the key "books". localStorage.getItem() always returns a string (or null if nothing is found)
   if (localStorageSavedBooks) {
-    books = JSON.parse(localStorageSavedBooks); // overwrite books with saved version, books is stored in localStorage (as JSON).
+    // Checks if something was actually found in localStorage. If yes, the block runs. If no, nothing happens and your code will use the default books array you defined above.
+    books = JSON.parse(localStorageSavedBooks); // localStorage only stores strings. JSON.parse() converts the saved JSON string back into a real JavaScript array of book objects. Then you overwrite your current books array with this saved version from the localStorage
   }
-  renderBooks();
+  renderBooks(); // This generates the HTML
 
   // After rendering, re-apply liked class for localStorage
-  books.forEach((book, index) => {
-    const heartIcon = document.getElementById(`heart-${index}`);
+  for (let index = 0; index < books.length; index++) {
+    // Loops through every book in your books array
+    const book = books[index]; // book is the current book object; index is its position in the array (used to build the correct IDs for DOM elements)
+    const heartIcon = document.getElementById(`heart-${index}`); // Finds the DOM element for that book’s heart icon
     const likesRef = document.getElementById(
+      // Finds the DOM element showing the number of likes for that book
       `numberOfLikesFromPeople-${index}`
     );
 
     if (book.liked) {
-      heartIcon.classList.add('liked');
+      // Checks if the saved book object has liked: true;
+      heartIcon.classList.add('liked'); // If yes → add the liked class to the heart. The liked class in your CSS makes the heart red. This ensures hearts stay red after a reload
     }
-    likesRef.innerText = book.likes; // make sure UI matches saved likes
-  });
+    likesRef.innerText = book.likes; // Updates the text inside the like counter <span> to match the saved number of likes from localStorage. This ensures the count stays correct across reload
+  }
 }
 
 function renderBooks() {

@@ -36,20 +36,27 @@ body {
     height: 50px;
 }
 
+h1 {
+    color: #a1640f;
+}
+
+.brand_name {
+    color: #ce8a3d;
+}
+
 header {
     display: flex;
     justify-content: flex-start;
     padding: 20px;
     width: 100%;
     max-width: 1440px;
-    color: #b48a4e;
 }
 
 .header_content {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 40px;
 }
 
 .content_limitation_main {
