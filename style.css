@@ -377,11 +377,10 @@ footer {
         align-items: flex-start;
     }
 
-    .input_field {
+    .input_field,
+    .input_field_name {
         padding: 5px 10px;
-        width: 250px;
     }
-
 }
 
 @media(max-width: 430px) {
@@ -415,12 +414,9 @@ footer {
         width: 250px;
     }
 
-    .input_field {
-        width: 170px;
-    }
-
+    .input_field,
     .input_field_name {
-        width: calc(100% - 50px);
+        width: 170px;
     }
 
     .seperator_line {
