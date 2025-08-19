@@ -292,7 +292,6 @@ function addComment(indexBook) {
   // Read values
   const name = nameInput.value.trim(); // get typed in value and trim() removes empty space
   const comment = textInput.value.trim();
-  console.log(errorMsg);
   // Simple validation (no empty comments)
   if (name === '' || comment === '') {
     errorMsg.innerHTML = '<div>Please type in a name and comment</div>';
@@ -308,6 +307,9 @@ function addComment(indexBook) {
     name: name,
     comment: comment,
   });
+
+  localStorage.setItem('books', JSON.stringify(books)); // Save updated books array to localStorage
+  // Global declaration of 'books', referring to let books = [...] which holds your array of book objects; Convert the current books array into a JSON string; Save that string under the key "books" in localStorage
 
   // Update the UI without re-rendering everything: append HTML for just the newly added comment.
   commentsRef.innerHTML += getHTMLForCommentsTemplate(
