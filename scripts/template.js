@@ -61,10 +61,11 @@ function getHTMLForBookTemplate(indexBook) {
     </div>
   <div class="add_comment">
     <input class="input_field" id="newCommentName-${indexBook}" type="text" placeholder="Your name" />
-    <input class="input_field" id="newCommentText-${indexBook}" type="text" placeholder="Write a comment..." />
+    <div class="commentText_sendButton_container"><input class="input_field" id="newCommentText-${indexBook}" type="text" placeholder="Write a comment..." />
       <button class="comment_button" onclick="addComment(${indexBook})">
         <img src="./img/send.png" alt="send message icon" class="send_message_icon" />
       </button>
+      </div>
       <div class="red_error_message" id="error_message-${indexBook}"></div>
 </div>
 
