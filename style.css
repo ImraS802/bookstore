@@ -190,16 +190,11 @@ h4 {
 
 .comment_button {
     display: flex;
-    /* make button a flex container */
     align-items: center;
-    /* center icon vertically */
     justify-content: center;
     background: none;
-    /* remove background */
     border: none;
-    /* remove border */
     padding: 0;
-    /* remove extra spacing */
     cursor: pointer;
 }
 
@@ -234,10 +229,8 @@ h4 {
 
 .gap_for_values {
     display: grid;
-    /* The first column is exactly 150 pixels wide — this is where your label (e.g., “Author”, “Year published:”) will go. The second column takes up the remaining space (1fr means “one fraction of the leftover space”) — this is where your values (e.g., author name, year) will go */
     grid-template-columns: 150px 1fr;
     align-items: start;
-    /* spacing between rows */
     margin-bottom: 10px;
 }
 
@@ -314,33 +307,25 @@ footer {
     align-items: center;
 }
 
-/* back to top button */
 .backToTop_btn {
-    /* Keeps the button fixed in the viewport, meaning it stays in the same spot even when the page is scrolled. */
     position: fixed;
-    /* Positions the button 40 pixels from the bottom and 40 pixels from the right of the viewport */
     bottom: 40px;
     right: 280px;
     display: none;
-    /* hidden by default */
     background-color: #466474;
     color: white;
     border: none;
     padding: 10px 16px;
-    /* Makes the button circular */
     border-radius: 50%;
     font-size: 20px;
     cursor: pointer;
-    /* Adds a white-ish shadow: 2px horizontal offset; 4px vertical offset; 8px blur radius; rgba(255, 255, 255, 0.4) → white color with 40% opacity */
     box-shadow: 2px 4px 8px rgba(255, 255, 255, 0.4);
-    /* Ensures the button stays on top of most other page elements, preventing it from being hidden behind content */
     z-index: 1000;
     transition: opacity 0.6s ease;
 }
 
 #backToTop:hover {
     background-color: #6C93A4;
-    /* Moves the button up 1 pixel slightly when hovered, creating a subtle “lift” effect */
     transform: translateY(-1px);
 }
 
@@ -359,11 +344,8 @@ footer {
 @media(max-width: 940px) {
     .backToTop_btn {
         right: 50%;
-        /* Move the button's right edge to 50% of viewport */
         left: auto;
-        /* Reset any left positioning if set */
         transform: translateX(50%);
-        /* Shift the button back by 50% of its width to truly center it */
     }
 }
 
@@ -437,10 +419,8 @@ footer {
         width: 170px;
     }
 
-    /* Target the name field */
     .input_field_name {
         width: calc(100% - 50px);
-        /* same shrink as comment input, adjust "40px" to button width */
     }
 
     .seperator_line {

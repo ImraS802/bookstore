@@ -197,53 +197,38 @@ let books = [
 ];
 
 function init() {
-  const localStorageSavedBooks = localStorage.getItem('books'); // Looks into the browser’s localStorage and tries to fetch the item stored under the key "books". localStorage.getItem() always returns a string (or null if nothing is found)
+  const localStorageSavedBooks = localStorage.getItem('books');
   if (localStorageSavedBooks) {
-    // Checks if something was actually found in localStorage. If yes, the block runs. If no, nothing happens and your code will use the default books array you defined above.
-    books = JSON.parse(localStorageSavedBooks); // localStorage only stores strings. JSON.parse() converts the saved JSON string back into a real JavaScript array of book objects. Then you overwrite your current books array with this saved version from the localStorage
+    books = JSON.parse(localStorageSavedBooks);
   }
-  renderBooks(); // This generates the HTML
+  renderBooks();
 
-  // After rendering, re-apply liked class for localStorage
   for (let index = 0; index < books.length; index++) {
-    // Loops through every book in your books array
-    const book = books[index]; // book is the current book object; index is its position in the array (used to build the correct IDs for DOM elements)
-    const heartIcon = document.getElementById(`heart-${index}`); // Finds the DOM element for that book’s heart icon
+    const book = books[index];
+    const heartIcon = document.getElementById(`heart-${index}`);
     const likesRef = document.getElementById(
-      // Finds the DOM element showing the number of likes for that book
       `numberOfLikesFromPeople-${index}`
     );
 
     if (book.liked) {
-      // Checks if the saved book object has liked: true;
-      heartIcon.classList.add('liked'); // If yes → add the liked class to the heart. The liked class in your CSS makes the heart red. This ensures hearts stay red after a reload
+      heartIcon.classList.add('liked');
     }
-    likesRef.innerText = book.likes; // Updates the text inside the like counter <span> to match the saved number of likes from localStorage. This ensures the count stays correct across reload
+    likesRef.innerText = book.likes;
   }
 }
 
 function renderBooks() {
-  let bookRef = document.getElementById('content'); // Finds the HTML element with the id="content" in your HTML
+  let bookRef = document.getElementById('content');
   bookRef.innerHTML = '';
 
   for (let i = 0; i < books.length; i++) {
-    // Loops through every book in your books array. i is the index of the current book.
-    bookRef.innerHTML += getHTMLForBookTemplate(i); // Calls getHTMLForBoook(i). This function returns a block of HTML for the i-th book. Appends (+=) that HTML to whatever is already inside bookRef.
+    bookRef.innerHTML += getHTMLForBookTemplate(i);
 
-    let commentsRef = document.getElementById(`comments${i}`); // Finds the <div> where this specific book’s comments should go.
-    // The ID is dynamically generated using template literals:
-    // For example, when i = 0, it looks for id="comments0".
-    // When i = 1, it looks for id="comments1", and so on.
-    // Stores that element reference in commentsRef
+    let commentsRef = document.getElementById(`comments${i}`);
 
     if (books[i].comments.length > 0) {
-      // Checks if the current book has any comments
       for (let j = 0; j < books[i].comments.length; j++) {
-        // j is the index of the current comment in that book’s comments array
-        // if yes, loop through all of them
         commentsRef.innerHTML += getHTMLForCommentsTemplate(i, j); // Calls getHTMLForCommentsTemplate(i, j) which returns HTML for one specific comment of one specific book.
-        // Appends this HTML to the commentsRef container so it shows up on the page
-        //You pass it i (the current book’s index) and j (the current comment’s index for that book)
       }
     } else {
       commentsRef.innerHTML = `<div class="gap_for_values"><div></div><i>No comments yet</i></div>`; // if no comments are written yet
@@ -251,73 +236,57 @@ function renderBooks() {
   }
 }
 
-// heart icon likes
 function toggleLike(indexBook) {
-  // It checks if the heart already has the "liked" class
-  // indexBook, it takes indexBook as a parameter → this tells the function which book in the books array we’re updating
   const likesRef = document.getElementById(
     `numberOfLikesFromPeople-${indexBook}`
-  ); // Finds the <span> where the number of likes is displayed. Example: for book 0 → document.getElementById("numberOfLikesFromPeople-0"). Saves a reference to it in likesRef
-  const heartIcon = document.getElementById(`heart-${indexBook}`); // Finds the <span> element for the heart icon of this book
-  let currentLikes = parseInt(likesRef.innerText); // Reads the current number of likes from the likesRef element’s text. parseInt converts it from a string "1250" into the number 1250
+  );
+  const heartIcon = document.getElementById(`heart-${indexBook}`);
+  let currentLikes = parseInt(likesRef.innerText);
 
   if (heartIcon.classList.contains('liked')) {
-    // Checks if the heart icon already has the class "liked". (if true → user already liked). "liked" is what you add when the user has clicked the heart (turning it red, for example). So this condition means: “Has the user already liked this book?”
-    // Unlike
-    likesRef.innerText = currentLikes - 1; // If the book is already liked: Decrease the like counter by 1 (currentLikes - 1) and update the <span> text.
-    books[indexBook].likes--; // update in books array (for localStorage functionality), substract one like from the value of the key "likes"
+    likesRef.innerText = currentLikes - 1;
+    books[indexBook].likes--;
     books[indexBook].liked = false;
-    heartIcon.classList.remove('liked'); // Remove "liked" class from the heart so the heart goes back to white
+    heartIcon.classList.remove('liked');
   } else {
-    // Like
-    likesRef.innerText = currentLikes + 1; // Increase the number shown (currentLikes + 1)
-    books[indexBook].likes++; // update in books array (for localStorage functionality), add one like to the value of the key "likes"
+    likesRef.innerText = currentLikes + 1;
+    books[indexBook].likes++;
     books[indexBook].liked = true;
-    heartIcon.classList.add('liked'); // Add "liked" class so the heart turns red
+    heartIcon.classList.add('liked');
   }
-  // Update DOM for localStorage
   likesRef.innerText = books[indexBook].likes;
 
-  // Save updated books array to localStorage
   localStorage.setItem('books', JSON.stringify(books));
 }
 
 function addComment(indexBook) {
-  // Get input fields for this specific book
   const nameInput = document.getElementById(`newCommentName-${indexBook}`);
   const textInput = document.getElementById(`newCommentText-${indexBook}`);
-  const commentsRef = document.getElementById(`comments${indexBook}`); // comments container for this specific book
+  const commentsRef = document.getElementById(`comments${indexBook}`);
   const errorMsg = document.getElementById(`error_message-${indexBook}`);
 
-  // Read values
-  const name = nameInput.value.trim(); // get typed in value and trim() removes empty space
+  const name = nameInput.value.trim();
   const comment = textInput.value.trim();
-  // Simple validation (no empty comments)
   if (name === '' || comment === '') {
     errorMsg.innerHTML = '<div>Please type in a name and comment</div>';
-    errorMsg.style.display = 'block'; // Guard clause: if either field is empty, show a message and stop (prevents adding empty comments)
+    errorMsg.style.display = 'block';
     return;
   }
 
   errorMsg.style.display = 'none';
 
-  // Add new comment to the books array
   books[indexBook].comments.push({
-    // Add a new comment object to the correct book’s comments array
     name: name,
     comment: comment,
   });
 
-  localStorage.setItem('books', JSON.stringify(books)); // Save updated books array to localStorage
-  // Global declaration of 'books', referring to let books = [...] which holds your array of book objects; Convert the current books array into a JSON string; Save that string under the key "books" in localStorage
+  localStorage.setItem('books', JSON.stringify(books));
 
-  // Update the UI without re-rendering everything: append HTML for just the newly added comment.
   commentsRef.innerHTML += getHTMLForCommentsTemplate(
     indexBook,
-    books[indexBook].comments.length - 1 // books[indexBook].comments.length - 1 is the index of the last (just pushed) comment
+    books[indexBook].comments.length - 1
   );
 
-  // Clear input fields
   nameInput.value = '';
   textInput.value = '';
 }
@@ -325,7 +294,6 @@ function addComment(indexBook) {
 function checkScrollForBackToTopButtonAppearence() {
   const backToTopButton = document.getElementById('backToTop');
   if (window.scrollY > 200) {
-    // window.scrollY gives the number of pixels the page has been scrolled vertically from the top
     backToTopButton.style.display = 'block';
   } else {
     backToTopButton.style.display = 'none';
@@ -333,5 +301,5 @@ function checkScrollForBackToTopButtonAppearence() {
 }
 
 function scrollToTop() {
-  window.scrollTo(0, 0); // window.scrollTo(x, y) scrolls the page to a specific position. (0, 0) means scroll to the very top-left corner of the page
+  window.scrollTo(0, 0);
 }
