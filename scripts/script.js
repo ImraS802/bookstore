@@ -228,10 +228,10 @@ function renderBooks() {
 
     if (books[i].comments.length > 0) {
       for (let j = 0; j < books[i].comments.length; j++) {
-        commentsRef.innerHTML += getHTMLForCommentsTemplate(i, j); // Calls getHTMLForCommentsTemplate(i, j) which returns HTML for one specific comment of one specific book.
+        commentsRef.innerHTML += getHTMLForCommentsTemplate(i, j);
       }
     } else {
-      commentsRef.innerHTML = `<div class="gap_for_values"><div></div><i>No comments yet</i></div>`; // if no comments are written yet
+      commentsRef.innerHTML = `<div class="gap_for_values"><div></div><i>No comments yet</i></div>`;
     }
   }
 }
@@ -291,7 +291,7 @@ function addComment(indexBook) {
   textInput.value = '';
 }
 
-function checkScrollForBackToTopButtonAppearence() {
+function checkScrollForBackToTopButtonAppearance() {
   const backToTopButton = document.getElementById('backToTop');
   if (window.scrollY > 200) {
     backToTopButton.style.display = 'block';

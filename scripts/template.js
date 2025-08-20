@@ -2,7 +2,7 @@
 
 function getHTMLForBookTemplate(indexBook) {
   return `
-    <div class="book_card">
+       <section class="book_card">
         <h4 id="nameOfBook">${books[indexBook].name}</h4>
         <div class="book_image_container">
             <img src="${books[indexBook].image}" alt="Cover of ${
@@ -38,15 +38,17 @@ function getHTMLForBookTemplate(indexBook) {
                 <div>Genre:</div>
                 <div>${books[indexBook].genre}</div>
             </div>
-            <div class="comments_headline">Comments:</div>
-            <div id="comments${indexBook}"></div>
+
+            <section class="comments_section">
+                <div class="comments_headline">Comments:</div>
+                <div class="show_comments" id="comments${indexBook}"></div>
         </div>
         <div class="seperator_container">
             <div class="seperator_line_comments"></div>
         </div>
         <div class="add_comment">
-         <div class="inputField_name_text_container">
-            <input class="input_field_name" id="newCommentName-${indexBook}" type="text" placeholder="Your name" />
+            <div class="inputField_name_text_container">
+                <input class="input_field_name" id="newCommentName-${indexBook}" type="text" placeholder="Your name" />
             </div>
             <div class="inputField_name_text_container"><input class="input_field" id="newCommentText-${indexBook}"
                     type="text" placeholder="Write a comment..." />
@@ -56,7 +58,8 @@ function getHTMLForBookTemplate(indexBook) {
             </div>
             <div class="red_error_message" id="error_message-${indexBook}"></div>
         </div>
-    </div>
+    </section>
+    </section>
   `;
 }
 
