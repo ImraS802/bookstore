@@ -197,24 +197,33 @@ let books = [
 ];
 
 function init() {
+  loadBooksFromLocalStorage();
+  renderBooks();
+  initializeLikes();
+}
+
+function loadBooksFromLocalStorage() {
   const localStorageSavedBooks = localStorage.getItem('books');
   if (localStorageSavedBooks) {
     books = JSON.parse(localStorageSavedBooks);
   }
-  renderBooks();
+}
 
+function initializeLikes() {
   for (let index = 0; index < books.length; index++) {
-    const book = books[index];
-    const heartIcon = document.getElementById(`heart-${index}`);
-    const likesRef = document.getElementById(
-      `numberOfLikesFromPeople-${index}`
-    );
-
-    if (book.liked) {
-      heartIcon.classList.add('liked');
-    }
-    likesRef.innerText = book.likes;
+    updateLikeUI(index);
   }
+}
+
+function updateLikeUI(index) {
+  const book = books[index];
+  const heartIcon = document.getElementById(`heart-${index}`);
+  const likesRef = document.getElementById(`numberOfLikesFromPeople-${index}`);
+
+  if (book.liked) {
+    heartIcon.classList.add('liked');
+  }
+  likesRef.innerText = book.likes;
 }
 
 function renderBooks() {
@@ -222,17 +231,23 @@ function renderBooks() {
   bookRef.innerHTML = '';
 
   for (let i = 0; i < books.length; i++) {
-    bookRef.innerHTML += getHTMLForBookTemplate(i);
+    renderSingleBook(bookRef, i);
+  }
+}
 
-    let commentsRef = document.getElementById(`comments${i}`);
+function renderSingleBook(bookRef, index) {
+  bookRef.innerHTML += getHTMLForBookTemplate(index);
+  let commentsRef = document.getElementById(`comments${index}`);
+  renderCommentsForBook(index, commentsRef);
+}
 
-    if (books[i].comments.length > 0) {
-      for (let j = 0; j < books[i].comments.length; j++) {
-        commentsRef.innerHTML += getHTMLForCommentsTemplate(i, j);
-      }
-    } else {
-      commentsRef.innerHTML = `<div class="gap_for_values"><div></div><i>No comments yet</i></div>`;
+function renderCommentsForBook(index, commentsRef) {
+  if (books[index].comments.length > 0) {
+    for (let j = 0; j < books[index].comments.length; j++) {
+      commentsRef.innerHTML += getHTMLForCommentsTemplate(index, j);
     }
+  } else {
+    commentsRef.innerHTML = `<div class="gap_for_values"><div></div><i>No comments yet</i></div>`;
   }
 }
 
@@ -241,22 +256,28 @@ function toggleLike(indexBook) {
     `numberOfLikesFromPeople-${indexBook}`
   );
   const heartIcon = document.getElementById(`heart-${indexBook}`);
-  let currentLikes = parseInt(likesRef.innerText);
 
   if (heartIcon.classList.contains('liked')) {
-    likesRef.innerText = currentLikes - 1;
-    books[indexBook].likes--;
-    books[indexBook].liked = false;
-    heartIcon.classList.remove('liked');
+    unlikeBook(indexBook, likesRef, heartIcon);
   } else {
-    likesRef.innerText = currentLikes + 1;
-    books[indexBook].likes++;
-    books[indexBook].liked = true;
-    heartIcon.classList.add('liked');
+    likeBook(indexBook, likesRef, heartIcon);
   }
-  likesRef.innerText = books[indexBook].likes;
 
   localStorage.setItem('books', JSON.stringify(books));
+}
+
+function likeBook(index, likesRef, heartIcon) {
+  books[index].likes++;
+  books[index].liked = true;
+  likesRef.innerText = books[index].likes;
+  heartIcon.classList.add('liked');
+}
+
+function unlikeBook(index, likesRef, heartIcon) {
+  books[index].likes--;
+  books[index].liked = false;
+  likesRef.innerText = books[index].likes;
+  heartIcon.classList.remove('liked');
 }
 
 function addComment(indexBook) {
@@ -265,28 +286,34 @@ function addComment(indexBook) {
   const commentsRef = document.getElementById(`comments${indexBook}`);
   const errorMsg = document.getElementById(`error_message-${indexBook}`);
 
-  const name = nameInput.value.trim();
-  const comment = textInput.value.trim();
-  if (name === '' || comment === '') {
+  if (!isValidComment(nameInput.value, textInput.value, errorMsg)) return;
+
+  saveComment(indexBook, nameInput.value.trim(), textInput.value.trim());
+  renderNewComment(indexBook, commentsRef);
+  clearCommentInputs(nameInput, textInput);
+}
+
+function isValidComment(name, comment, errorMsg) {
+  if (name.trim() === '' || comment.trim() === '') {
     errorMsg.innerHTML = '<div>Please type in a name and comment</div>';
     errorMsg.style.display = 'block';
-    return;
+    return false;
   }
-
   errorMsg.style.display = 'none';
+  return true;
+}
 
-  books[indexBook].comments.push({
-    name: name,
-    comment: comment,
-  });
-
+function saveComment(indexBook, name, comment) {
+  books[indexBook].comments.push({name, comment});
   localStorage.setItem('books', JSON.stringify(books));
+}
 
-  commentsRef.innerHTML += getHTMLForCommentsTemplate(
-    indexBook,
-    books[indexBook].comments.length - 1
-  );
+function renderNewComment(indexBook, commentsRef) {
+  const newIndex = books[indexBook].comments.length - 1;
+  commentsRef.innerHTML += getHTMLForCommentsTemplate(indexBook, newIndex);
+}
 
+function clearCommentInputs(nameInput, textInput) {
   nameInput.value = '';
   textInput.value = '';
 }
